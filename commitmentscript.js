@@ -1,6 +1,6 @@
 function addText(name, phone) {
     let createDiv = document.createElement("div");
-    createDiv.innerHTML = name + "\n" + phone;
+    createDiv.innerHTML = name + " " + phone;
     document.querySelector('.pageDescription').appendChild(createDiv);
 }
 function getCommit() {
