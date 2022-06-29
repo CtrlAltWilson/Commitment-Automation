@@ -42,10 +42,11 @@ function inputDetails(arr, minutes){
 		document.querySelector('[id=saveBtn]').click();\n \
 	},1000);\
 	";
+	arr.push(minutes);
 	//document.querySelector(\"#hour1\").click();\n \
 	var sampleTextarea = document.createElement("textarea");
 	document.body.appendChild(sampleTextarea);
-	sampleTextarea.value = text; //save main text in it
+	sampleTextarea.value = arr; //save main text in it
 	sampleTextarea.select(); //select textarea contenrs
 	document.execCommand("copy");
 	document.body.removeChild(sampleTextarea);
@@ -55,6 +56,7 @@ function inputDetails(arr, minutes){
 	setOutbound[0].title = "Support OB";
 	setOutbound[0].textContent = "Support OB";
 	*/
+	arr.pop(minutes);
 }
 
 function addText(arr) {
