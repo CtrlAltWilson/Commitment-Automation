@@ -64,7 +64,7 @@ function createCommit() {
             setTimeout(function(){
                 assignedTo = document.querySelectorAll('input[type=radio][name=promiseKeeperRbtn]');
                 assignedTo[1].checked = true;
-            },1000);
+            },2000);
             console.log("end createCommit");
         });
 }
