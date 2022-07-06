@@ -1,0 +1,4 @@
+cx_Freeze==6.11.1
+pytz==2022.1
+selenium==4.3.0
+webdriver_manager==3.8.0
