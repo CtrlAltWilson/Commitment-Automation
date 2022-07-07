@@ -30,8 +30,8 @@ def preload():
 def main():
     global addminutes
     ac = agentCount(driver,root,B1)
-    if ac > 2:
-        addminutes = 5
+    if ac > 1:
+        addminutes = 2
     else:
         addminutes = 60
     cc = checkCases(driver,B1, root)

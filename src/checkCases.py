@@ -15,7 +15,7 @@ def checkCases(driver,btn,root):
             for i in caselist:
                 case_status = i.find_element("class name", "x-grid3-col-CASES_STATUS")
                 case_contact = i.find_element("class name", "x-grid3-col-NAME")
-                case_email = i.find_element("class name","x-grid3-td-CASES_EMAIL")
+                case_email = i.find_element("class name","x-grid3-col-00N0P000006Fnqp")
                 if ("New" in case_status.text) and ("Installation Request" not in case_status.text) and \
                     (case_contact.text != " ") and ("delete" not in case_status.text) and \
                         ("remove" not in case_status.text) and ("@raptortech.com" not in case_email.text) and \

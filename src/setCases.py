@@ -30,8 +30,8 @@ def setNewCase(root,btn,driver):
                 if company is None:
                     company = "Raptor 6"
                 clicky("00N0P000007X5eZ_ileinner",driver)
-                selecty("00N0P000007X5eZ_unselected",company)
-                okBtn = driver.find_elements("class name", "picklistArrowRight",driver)
+                selecty("00N0P000007X5eZ_unselected",company,driver)
+                okBtn = driver.find_elements("class name", "picklistArrowRight")
                 okBtn[0].click()
                 okBtn = driver.find_elements("class name", "zen-btn")
                 okBtn[0].click()

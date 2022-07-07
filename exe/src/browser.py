@@ -79,9 +79,12 @@ def checkSSO(root,btn,headless = 1):
         if headless == 0:
             while "login.microsoftonline" in driver.current_url:
                 root.after(2000, status(btn,""))
+            root.after(5000, status(btn,""))
+            while "Lightning Experience" in driver.find_element("class name","innerMain").text:
+                root.after(2000, status(btn,""))
             driver.close()
             return 1
-        if "login.microsoftonline" in driver.current_url:
+        if "login.microsoftonline" in driver.current_url or "Lightning Experience" in driver.find_element("class name","innerMain").text:
             status(btn,"SSO required")
             return 0
     except Exception as functionerr:
