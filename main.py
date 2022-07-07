@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 from threading import *
+import tkinter
 
 from src.constrants import startGUI,driver, action, addminutes,autorun
-from src.config import getConfig
+from src.config import getConfig, setAutorun
 from src.end import end
 from src.updatetk import updatetk as status
 from src.browser import mainLaunch
@@ -14,9 +15,9 @@ from src.setCases import setNewCase
 from src.setCommit import setCommit
 
 def preload():
-    global config, driver, action, B2
+    global driver, action, B2
     B2.grid_forget()
-    config = getConfig(B1)
+    autoChk.grid_forget()
     driver = mainLaunch(root,config,driver, B1)
     if driver == -1:
         status(B1,"Error starting")
@@ -73,23 +74,56 @@ def pausebtn():
 def contbtn():
     status(B2,"Pause",pausebtn)
 
+def setAutorunMain():
+    print("Writing to config") 
+    print(autorun.get())
+
+    setAutorun(autorun.get())
+    config['autorun'] = autorun.get()
+    if autorun.get() == "1":
+        countdown(5)
+
+def countdown(count):
+    status(B1,str(count))
+
+    if count > 0:
+        if autorun.get() == "0":
+            status(B1,"Welcome to the commitment automation tool!")
+            setAutorunMain()
+            return
+        # call countdown again after 1000ms (1s)
+        root.after(1000, countdown, count-1)
+    else:
+        if autorun.get() == "1":
+            threadworker()
+        else:
+            return
+
 if startGUI == 0:
-    main()
+    threadworker()
 else:
     root = Tk()
     root.title("Commitment Manager")
-    root.geometry("250x100")
+    root.geometry("250x150")
     root.grid_columnconfigure(0,weight=1)
     frm = ttk.Frame(root, padding=5)
     frm.grid()
     B1 = Label(frm, text="loading...",wraplength=200, justify='center')
     B1.grid(column=0, row=0)
-    status(B1,"Welcome to the commitment automation tool!")
+
     B2 = ttk.Button(frm, text="Start",command=threadworker)
     B2.grid(column=0,row=1)
 
     B3 = ttk.Button(frm, text="Quit", command=lambda: end(root,driver))
     B3.grid(column=0, row=2)
-    if autorun == 1:
-        threadworker()
+    
+    config = getConfig(B1)
+    autorun = tkinter.StringVar(value=config['autorun'])
+    print(autorun)
+    status(B1,"Welcome to the commitment automation tool!")
+    
+    autoChk = (ttk.Checkbutton(root,text="Autorun", variable=autorun,command=setAutorunMain))
+    autoChk.grid(column=0,row=3)
+    if autorun.get() == "1":
+        countdown(5)
     root.mainloop()

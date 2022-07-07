@@ -23,7 +23,7 @@ def getConfig(btn):
         profileurl.pop(-1)
         config['profile_url'] = ("{}\\".format('\\'.join(profileurl)))
         
-        config['autorun'] = True
+        config['autorun'] = "0"
         with open('assets\config.json','w') as f:
             json.dump(config, f)
         
@@ -32,3 +32,12 @@ def getConfig(btn):
     status(btn,"Config caught!")
     
     return config
+
+def setAutorun(value):
+    with open('assets\config.json','r') as f:
+        config = json.load(f)
+
+    config['autorun'] = value
+
+    with open('assets\config.json','w') as f:
+        json.dump(config, f)
