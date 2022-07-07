@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from threading import *
 
-from src.constrants import debug, startGUI,driver, action, addminutes
+from src.constrants import startGUI,driver, action, addminutes,autorun
 from src.config import getConfig
 from src.end import end
 from src.updatetk import updatetk as status
@@ -90,4 +90,6 @@ else:
 
     B3 = ttk.Button(frm, text="Quit", command=lambda: end(root,driver))
     B3.grid(column=0, row=2)
+    if autorun == 1:
+        threadworker()
     root.mainloop()

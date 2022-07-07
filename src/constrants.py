@@ -17,3 +17,4 @@ action = None
 addminutes = 2
 retry = 0
 config = None
+autorun = 1
