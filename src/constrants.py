@@ -1,4 +1,4 @@
-version = "2.81"
+version = "2.82"
 getver = version.split('.')
 
 debug = 0
@@ -30,4 +30,4 @@ fgc = "white"
 stage = 0
 result = None
 commitscreated = 0
-
+noconsole = 0

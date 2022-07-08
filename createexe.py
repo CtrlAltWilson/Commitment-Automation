@@ -37,13 +37,13 @@ PyInstaller --noconsole --onefile --clean --add-data "assets/Logo_b.ico;."  --ad
 
 import PyInstaller.__main__
 import time
-from src.constrants import getver,debug
+from src.constrants import getver,debug,noconsole
 
 #noconsole:
 #   python3 -m PyInstaller --noconsole --onefile --clean --icon=Logo_b.ico --add-data "Logo_b.ico;." main.py
 #console:
 #   python3 -m PyInstaller --onefile --clean --icon=Logo_b.ico --add-data "assets/Logo_b.ico;." main.py -n cmtmgr
-noconsole = 0
+
 
 
 if debug == 1:
