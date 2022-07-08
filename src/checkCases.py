@@ -1,6 +1,6 @@
 from src.updatetk import updatetk as status
 from src.tabs import switchTab
-from src.constrants import retrymax
+from src.constrants import retrymax, debug
 
 def checkCases(driver,btn,root):
     retry = 0
@@ -17,14 +17,16 @@ def checkCases(driver,btn,root):
                 case_contact = i.find_element("class name", "x-grid3-col-NAME")
                 case_email = i.find_element("class name","x-grid3-col-00N0P000006Fnqp")
                 if ("New" in case_status.text) and ("Installation Request" not in case_status.text) and \
-                    (case_contact.text != " ") and ("delete" not in case_status.text) and \
-                        ("remove" not in case_status.text) and ("@raptortech.com" not in case_email.text) and \
+                    (case_contact.text != " ") and ("delete" not in case_status.text.casefold()) and \
+                        ("remove" not in case_status.text.casefold()) and ("@raptortech.com" not in case_email.text) and \
                             ("@lobbyguard.com" not in case_email.text):
                     case_subject = i.find_element("class name", "x-grid3-col-CASES_SUBJECT")
                     case_subject_link = case_subject.find_element("link text", case_subject.text)
                     return case_subject_link.get_attribute('href')
             return 0
         except Exception as functionerr:
-            print("CHECKCASES",functionerr)
+            if debug == 1:
+                print("CHECKCASES",functionerr)
+            status(btn,"Check Cases Error")
         retry += 1
     return 0

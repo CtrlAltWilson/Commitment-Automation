@@ -1,11 +1,16 @@
 import os, json
 from src.updatetk import updatetk as status
+from src.constrants import debug
 
 def getConfig(btn):
     try:
         status(btn,"Getting config file...")
-        with open('assets\config.json','r') as f:
-            config = json.load(f)
+        if debug == 1:
+            with open('assets\config.json','r') as f:
+                config = json.load(f)
+        else:
+            with open('config.json','r') as f:
+                config = json.load(f)
     except:
         status(btn,"No config file found! Creating one...")
         default_user = os.getcwd().split("\\")
@@ -24,20 +29,33 @@ def getConfig(btn):
         config['profile_url'] = ("{}\\".format('\\'.join(profileurl)))
         
         config['autorun'] = "0"
-        with open('assets\config.json','w') as f:
-            json.dump(config, f)
+        if debug == 1:
+            with open('assets\config.json','w') as f:
+                json.dump(config, f)
+        else:
+            with open('config.json','w') as f:
+                json.dump(config, f)
         
-        getConfig()
+        getConfig(btn)
 
     status(btn,"Config caught!")
     
     return config
 
 def setAutorun(value):
-    with open('assets\config.json','r') as f:
-        config = json.load(f)
+    if debug == 1:
+        with open('assets\config.json','r') as f:
+            config = json.load(f)
 
-    config['autorun'] = value
+        config['autorun'] = value
 
-    with open('assets\config.json','w') as f:
-        json.dump(config, f)
+        with open('assets\config.json','w') as f:
+            json.dump(config, f)
+    else:
+        with open('config.json','r') as f:
+            config = json.load(f)
+
+        config['autorun'] = value
+
+        with open('config.json','w') as f:
+            json.dump(config, f)

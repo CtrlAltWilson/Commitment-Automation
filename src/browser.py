@@ -13,9 +13,11 @@ def mainLaunch(root,config,driver2,btn):
         while True:
             chk1 = launchBrowser(root,config,btn)
             chk2 = checkSSO(root, btn)
-            print(chk1,chk2)
+            if debug == 1:
+                print(chk1,chk2)
             if chk1 == -1 or chk2 == -1:
-                print("BORKED")
+                if debug == 1:
+                    print("BORKED")
                 return -1
             if chk2 == 0: #SSO needed
                 chk1 = launchBrowser(root,config,btn,0)
@@ -23,7 +25,9 @@ def mainLaunch(root,config,driver2,btn):
             if chk2 == 1:
                 break
     except Exception as e:
-        print("MAINLAUNCH",str(e))
+        if debug == 1:
+            print("MAINLAUNCH",str(e))
+        status(btn, "MAINLAUNCH Error")
     if debug == 1:
         driver = launchBrowser(root,config,btn,0,1)
     else:
@@ -56,7 +60,8 @@ def launchBrowser(root,config,btn,headless = 1,getDriver = 0):
             else:
                 return 1
         except Exception as e:
-            print("LAUNCHBROWSER",str(e))
+            if debug == 1:
+                print("LAUNCHBROWSER",str(e))
             root.after(5000, status(btn,""))
             if "unknown error" in str(e):
                 status(btn,"Error: Existing Browser Opened! Retrying...")
@@ -67,8 +72,10 @@ def launchBrowser(root,config,btn,headless = 1,getDriver = 0):
                 root.after(2000, status(btn,""))
             else:
                 print(str(e))
+            status(btn,"Launch Browser Error")
         retry += 1
-        print("Retrying")
+        if debug == 1:
+            print("Retrying")
     status(btn,"Failed retries with browser")
     return -1
 
@@ -79,13 +86,18 @@ def checkSSO(root,btn,headless = 1):
         if headless == 0:
             while "login.microsoftonline" in driver.current_url:
                 root.after(2000, status(btn,""))
+            root.after(5000, status(btn,""))
+            while "Lightning Experience" in driver.find_element("class name","innerMain").text:
+                root.after(2000, status(btn,""))
             driver.close()
             return 1
-        if "login.microsoftonline" in driver.current_url:
+        if "login.microsoftonline" in driver.current_url or "Lightning Experience" in driver.find_element("class name","innerMain").text:
             status(btn,"SSO required")
             return 0
     except Exception as functionerr:
-        print("SSO",functionerr)
+        if debug == 1:
+            print("SSO",functionerr)
+        status(btn,"SSO Error")
     return 1
 
 def inBrowser(btn1):
@@ -97,6 +109,8 @@ def inBrowser(btn1):
                 driver.get(caseLink)
             return 1
         except Exception as functionerr:
-            print("INBROWSER",functionerr)
+            if debug == 1:
+                print("INBROWSER",functionerr)
+            status(btn1, "inBrowser Error")
         retry += 1
     return -1

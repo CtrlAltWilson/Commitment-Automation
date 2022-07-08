@@ -1,6 +1,6 @@
 version = "2.0"
 
-debug = 0
+debug = 1
 startGUI = 1
 retrymax = 3
 phonefilter = '()-. '
@@ -18,3 +18,11 @@ addminutes = 2
 retry = 0
 config = None
 autorun = None
+root = None
+autoChk = None
+isStopped = 0
+preStage = 0
+finished = False
+bgc = "#262a2e"
+bgaccent = "#56595d"
+fgc = "white"

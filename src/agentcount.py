@@ -26,11 +26,14 @@ def agentCount(driver,root,btn):
             return counter
         except Exception as functionerr:
             if "Unable to locate element" in str(functionerr):
-                print("Page didn't load, reloading")
+                if debug == 1:
+                    print("Page didn't load, reloading")
                 driver.get(sfAgentlink)
                 root.after(3000, status(btn,""))
             else:
-                print("AGENT COUNT",str(functionerr))
+                if debug == 1:
+                    print("AGENT COUNT",str(functionerr))
+                status(btn,"Agent Count Error")
         retry += 1
     if debug == 1:
         return 1

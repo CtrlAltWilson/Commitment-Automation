@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 
 from src.updatetk import updatetk as status
 from src.tabs import switchTab
+from src.constrants import debug
 
 def setCommit(driver, btn,root,addminutes):
     try:
@@ -25,7 +26,7 @@ def setCommit(driver, btn,root,addminutes):
         case = driver.find_element("class name", "pageDescription")
         case = case.text
         root.after(2000, status(btn,""))
-
+        status(btn,case)
         status(btn,"Switching frames")
 
         radioScript = 'radiobtn = document.querySelectorAll("input[type=radio][name=promiseBtnId]"); radiobtn[1].checked = true;'
@@ -71,5 +72,7 @@ def setCommit(driver, btn,root,addminutes):
 
         return 1
     except Exception as functionerr:
-        print("SETCOMMIT",str(functionerr))
+        if debug == 1:
+            print("SETCOMMIT",str(functionerr))
+        status(btn,"Set Commit Error")
         return 0

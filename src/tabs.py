@@ -18,4 +18,5 @@ def switchTab(driver,tab: int):
     try:
         driver.switch_to.window(driver.window_handles[tab])
     except:
+        print("No tabs")
         return

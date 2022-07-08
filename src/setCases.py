@@ -2,6 +2,7 @@ from src.updatetk import updatetk as status
 from src.constrants import retrymax
 from src.clicky import clicky
 from src.selecty import selecty
+from src.constrants import debug
 
 def setNewCase(root,btn,driver):
     retry = 0
@@ -9,6 +10,9 @@ def setNewCase(root,btn,driver):
         try:
             root.after(5000, status(btn,""))
             status(btn,"Setting new cases...")
+            case = driver.find_element("class name", "pageDescription")
+            case = case.text
+            status(btn, "Case: {}".format(case))
             clicky("cas7_ilecell",driver)
             root.after(2000, status(btn,""))
             selecty("cas7","Scheduled Support Call",driver)
@@ -39,6 +43,8 @@ def setNewCase(root,btn,driver):
             driver.execute_script(saveCase)
             return 1
         except Exception as functionerr:
-            print("SETNEWCASES",str(functionerr))
+            if debug == 1:
+                print("SETNEWCASES",str(functionerr))
+            status(btn, "SetCases Error")
         retry += 1
     return 0

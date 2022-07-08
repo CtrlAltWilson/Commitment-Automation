@@ -8,4 +8,5 @@ def end(root, driver = None):
                 pass
         root.after(1,root.destroy())
     except Exception as functionerr:
-        print(functionerr)
+        #print(functionerr)
+        pass
