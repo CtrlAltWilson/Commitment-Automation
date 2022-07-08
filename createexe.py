@@ -36,6 +36,7 @@ PyInstaller --noconsole --onefile --clean --add-data "assets/Logo_b.ico;."  --ad
 """
 
 import PyInstaller.__main__
+from src.constrants import getver,debug
 
 #noconsole:
 #   python3 -m PyInstaller --noconsole --onefile --clean --icon=Logo_b.ico --add-data "Logo_b.ico;." main.py
@@ -43,13 +44,19 @@ import PyInstaller.__main__
 #   python3 -m PyInstaller --onefile --clean --icon=Logo_b.ico --add-data "assets/Logo_b.ico;." main.py -n cmtmgr
 noconsole = 0
 
+
+if debug == 1:
+    getver.append("beta")
+if noconsole == 0:
+    getver.append("dev")
+
 console = [
     'main.py',
     '--onefile',
     '--clean',
     '--icon=assets/Logo_b.ico',
     '--add-data=assets/Logo_b.ico;.',
-    '--name=cmtmgr'
+    '--name=cmtmgr_{}'.format("_".join(getver))
 ]
 
 if noconsole == 1:

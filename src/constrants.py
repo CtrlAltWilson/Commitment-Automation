@@ -1,4 +1,5 @@
 version = "2.6"
+getver = version.split('.')
 
 debug = 0
 startGUI = 1
@@ -28,3 +29,4 @@ bgaccent = "#56595d"
 fgc = "white"
 stage = 0
 result = None
+
