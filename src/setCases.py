@@ -1,9 +1,15 @@
-from src.updatetk import updatetk as status
-from src.constrants import retrymax
-from src.clicky import clicky
-from src.selecty import selecty
-from src.constrants import debug
-
+try:
+    from src.updatetk import updatetk as status
+    from src.constrants import retrymax
+    from src.clicky import clicky
+    from src.selecty import selecty
+    from src.constrants import debug
+except:
+    from updatetk import updatetk as status
+    from constrants import retrymax
+    from clicky import clicky
+    from selecty import selecty
+    from constrants import debug
 def setNewCase(root,btn,driver):
     retry = 0
     while(retry < retrymax):

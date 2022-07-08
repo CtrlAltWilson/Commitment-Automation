@@ -1,4 +1,4 @@
-import glob
+"""import glob
 
 a = Analysis(['application.py'],
          pathex=['D:\\MyApplication'],
@@ -33,6 +33,26 @@ exe = EXE(pyz,
       console=True )
 
 PyInstaller --noconsole --onefile --clean --add-data "assets/Logo_b.ico;."  --add-data "src/agentcount.py;." --add-data "src/browser.py;." --add-data "src/checkCases.py;." --add-data "src/clicky.py;." --add-data "src/config.py;." --add-data "src/constrants.py;." --add-data "src/end.py;." --add-data "src/selecty.py;." --add-data "src/setCases.py;." --add-data "src/setCommit.py;." --add-data "src/tabs.py;." --add-data "src/updatetk.py;." main.py
+"""
 
+import PyInstaller.__main__
 
-python3 -m PyInstaller --noconsole --onefile --icon=Logo_b.ico --add-data "Logo_b.ico;." main.py
+#noconsole:
+#   python3 -m PyInstaller --noconsole --onefile --clean --icon=Logo_b.ico --add-data "Logo_b.ico;." main.py
+#console:
+#   python3 -m PyInstaller --onefile --clean --icon=Logo_b.ico --add-data "assets/Logo_b.ico;." main.py -n cmtmgr
+noconsole = 0
+
+console = [
+    'main.py',
+    '--onefile',
+    '--clean',
+    '--icon=assets/Logo_b.ico',
+    '--add-data=assets/Logo_b.ico;.',
+    '--name=cmtmgr'
+]
+
+if noconsole == 1:
+    console.append('--noconsole')
+
+PyInstaller.__main__.run(console)

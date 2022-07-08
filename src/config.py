@@ -1,14 +1,17 @@
 import os, json
-from src.updatetk import updatetk as status
-from src.constrants import debug
-
+try:
+    from src.updatetk import updatetk as status
+    from src.constrants import debug
+except:
+    from updatetk import updatetk as status
+    from constrants import debug
 def getConfig(btn):
     try:
         status(btn,"Getting config file...")
-        if debug == 1:
+        try:
             with open('assets\config.json','r') as f:
                 config = json.load(f)
-        else:
+        except:
             with open('config.json','r') as f:
                 config = json.load(f)
     except:
@@ -43,7 +46,7 @@ def getConfig(btn):
     return config
 
 def setAutorun(value):
-    if debug == 1:
+    try:
         with open('assets\config.json','r') as f:
             config = json.load(f)
 
@@ -51,7 +54,7 @@ def setAutorun(value):
 
         with open('assets\config.json','w') as f:
             json.dump(config, f)
-    else:
+    except:
         with open('config.json','r') as f:
             config = json.load(f)
 

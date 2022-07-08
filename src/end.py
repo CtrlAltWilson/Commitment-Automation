@@ -1,3 +1,5 @@
+import os
+
 def end(root, driver = None):
     try:
         #status_update("Goodbye!")
@@ -9,4 +11,8 @@ def end(root, driver = None):
         root.after(1,root.destroy())
     except Exception as functionerr:
         #print(functionerr)
+        pass
+    try:
+        os.system('cmd /c taskkill /f /im cmtmgr.exe')
+    except: 
         pass

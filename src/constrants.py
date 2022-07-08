@@ -1,6 +1,6 @@
-version = "2.0"
+version = "2.6"
 
-debug = 1
+debug = 0
 startGUI = 1
 retrymax = 3
 phonefilter = '()-. '
@@ -26,3 +26,5 @@ finished = False
 bgc = "#262a2e"
 bgaccent = "#56595d"
 fgc = "white"
+stage = 0
+result = None

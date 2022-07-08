@@ -3,9 +3,12 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
-from src.constrants import debug, retrymax, driver,caseLink
-from src.updatetk import updatetk as status
-
+try:
+    from src.constrants import debug, retrymax, driver,caseLink
+    from src.updatetk import updatetk as status
+except: 
+    from constrants import debug, retrymax, driver,caseLink
+    from updatetk import updatetk as status
 def mainLaunch(root,config,driver2,btn):
     global driver
     driver = driver2
@@ -97,7 +100,7 @@ def checkSSO(root,btn,headless = 1):
     except Exception as functionerr:
         if debug == 1:
             print("SSO",functionerr)
-        status(btn,"SSO Error")
+        #status(btn,"SSO Error")
     return 1
 
 def inBrowser(btn1):

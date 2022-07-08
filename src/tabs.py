@@ -1,4 +1,7 @@
-from src.constrants import sfAgentlink
+try:
+    from src.constrants import sfAgentlink
+except:
+    from constrants import sfAgentlink
 
 def defaultTabs(driver):
     driver.execute_script("window.open()")

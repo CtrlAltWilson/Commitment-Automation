@@ -1,7 +1,11 @@
-from src.constrants import retrymax,sfAgentlink, debug
-from src.updatetk import updatetk as status
-from src.tabs import switchTab
-
+try:
+    from src.constrants import retrymax,sfAgentlink, debug
+    from src.updatetk import updatetk as status
+    from src.tabs import switchTab
+except:
+    from constrants import retrymax,sfAgentlink, debug
+    from updatetk import updatetk as status
+    from tabs import switchTab
 def agentCount(driver,root,btn):
     retry = 0
     switchTab(driver,1)
@@ -35,6 +39,6 @@ def agentCount(driver,root,btn):
                     print("AGENT COUNT",str(functionerr))
                 status(btn,"Agent Count Error")
         retry += 1
-    if debug == 1:
-        return 1
+    #if debug == 1:
+    #    return 1
     return 0

@@ -1,7 +1,11 @@
-from src.updatetk import updatetk as status
-from src.tabs import switchTab
-from src.constrants import retrymax, debug
-
+try:
+    from src.updatetk import updatetk as status
+    from src.tabs import switchTab
+    from src.constrants import retrymax, debug
+except:
+    from updatetk import updatetk as status
+    from tabs import switchTab
+    from constrants import retrymax, debug
 def checkCases(driver,btn,root):
     retry = 0
     switchTab(driver,0)
