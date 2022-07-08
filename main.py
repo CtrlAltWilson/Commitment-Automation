@@ -173,10 +173,14 @@ else:
     root = Tk()
     root.title("Commitment Manager")
     root.geometry("250x200")
+    
+    """
+    #TODO
     try:
         root.iconbitmap("assets/Logo_b.ico")
     except:
         root.iconbitmap("Logo_b.ico")
+    """
 
     root.configure(bg=bgc)
     root.grid_columnconfigure(0,weight=1)
