@@ -3,6 +3,7 @@ from tkinter import ttk
 
 from threading import *
 import tkinter
+import webbrowser
 
 from src.end import end
 from src.browser import mainLaunch
@@ -45,6 +46,7 @@ def main(mainStage = 0):
         return
     elif mainStage == 0:
         ac = agentCount(driver,root,B1)
+        print(ac)
         if ac >= 1:
             addminutes = 2
         else:
@@ -80,7 +82,7 @@ def main(mainStage = 0):
         status(B1,"Cleaning up")
         cleanup(2000,3)
         return
-    main(mainStage + 1)
+    root.after(250,main(mainStage + 1))
 
 def cleanup(seconds, option = 0):
     if option == 1:
@@ -150,12 +152,15 @@ def rebuild():
     autoChk = (ttk.Checkbutton(root,text="Autorun", variable=autorun,command=setAutorunMain))
     autoChk.grid(column=0,row=3)
 
+def callback(url):
+    webbrowser.open_new(url)
+
 if startGUI == 0:
     threadworker()
 else:
     root = Tk()
     root.title("Commitment Manager")
-    root.geometry("250x165")
+    root.geometry("250x200")
     if debug == 1:
         root.iconbitmap("assets/Logo_b.ico")
 
@@ -176,14 +181,21 @@ else:
 
     B3 = tkinter.Button(frm, text="Quit", command=lambda: end(root,driver), bg=bgaccent,fg=fgc,width=20,height=2,font=('Arial', 10))
     B3.grid(column=0, row=2)
-    
+
     config = getConfig(B1)
     autorun = StringVar(value=config['autorun'])
-    print(autorun)
+    if debug == 1:
+        print(autorun.get())
     status(B1,"Welcome to the commitment automation tool!")
     
     autoChk = (tkinter.Checkbutton(root,text="Autorun", variable=autorun,command=setAutorunMain,bg=bgc,fg=fgc,selectcolor=bgc))
     autoChk.grid(column=0,row=3)
+
+    B4 = Label(frm, text="py.wilsonngo.com",wraplength=200, justify='center',bg=bgc,fg=fgc,height=2)
+    B4.grid(column=0, row=4)
+    #B4.bind("<Button-1>",lambda e: callback("https://py.wilsonngo.com"))
+
     if autorun.get() == "1":
         countdown(5)
+
     root.mainloop()
