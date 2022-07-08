@@ -95,7 +95,8 @@ def main(mainStage = 0):
         ac = agentCount(driver,root,B1)
         status(B4,"Agents: {}".format(ac+1))
         #print(ac)
-        if ac >= 1:
+        #should probably recheck this
+        if ac > 1:
             addminutes = 2
         else:
             addminutes = 60
