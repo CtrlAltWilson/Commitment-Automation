@@ -36,6 +36,7 @@ PyInstaller --noconsole --onefile --clean --add-data "assets/Logo_b.ico;."  --ad
 """
 
 import PyInstaller.__main__
+import time
 from src.constrants import getver,debug
 
 #noconsole:
@@ -59,7 +60,12 @@ console = [
     '--name=cmtmgr_{}'.format("_".join(getver))
 ]
 
+print("Creating {}".format(console[5]))
+
 if noconsole == 1:
     console.append('--noconsole')
+    print(console[6])
+
+time.sleep(5)
 
 PyInstaller.__main__.run(console)
