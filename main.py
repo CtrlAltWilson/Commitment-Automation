@@ -65,15 +65,7 @@ def main(mainStage = 0):
             cleanup(60000,3)
             return
     elif mainStage == 3:
-        retryCommit = 0
-        sco = 0
-        while (retryCommit < retrymax):
-            print(retryCommit)
-            sco = setCommit(driver,B1,root,addminutes)
-            if sco == 0:
-                retryCommit =+ 1
-            else:
-                break
+        sco = setCommit(driver,B1,root,addminutes)
         if sco == 0:
             status(B1,"Commit err, restarting...")
             cleanup(60000,3)
