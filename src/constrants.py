@@ -1,4 +1,4 @@
-version = "2.6"
+version = "2.8"
 getver = version.split('.')
 
 debug = 0
@@ -29,4 +29,5 @@ bgaccent = "#56595d"
 fgc = "white"
 stage = 0
 result = None
+commitscreated = 0
 

@@ -2,16 +2,22 @@ try:
     from src.constrants import retrymax,sfAgentlink, debug
     from src.updatetk import updatetk as status
     from src.tabs import switchTab
+    from src.ua_status import check_unavail
 except:
     from constrants import retrymax,sfAgentlink, debug
     from updatetk import updatetk as status
     from tabs import switchTab
+    from ua_status import check_unavail
+
+
 def agentCount(driver,root,btn):
     retry = 0
     switchTab(driver,1)
     driver.get(sfAgentlink)
     while (retry < retrymax):
         try:
+            status(btn,"Checking work status")
+            check_unavail(driver)
             root.after(10000, status(btn,"Checking availability..."))
             agentlist = driver.find_element("id","homeAgentsIconId")
             agentlist.click()

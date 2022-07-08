@@ -10,25 +10,59 @@ try:
     from src.updatetk import updatetk as status
     from src.config import getConfig, setAutorun
     from src.tabs import createTab, defaultTabs, closeTab, switchTab
-    from src.constrants import startGUI,driver, action, addminutes,autorun, isStopped, retrymax, finished, bgc, bgaccent, fgc,debug, version
+    from src.constrants import  \
+        action,             \
+        addminutes,         \
+        autorun,            \
+        bgaccent,           \
+        bgc,                \
+        commitscreated,     \
+        debug,              \
+        driver,             \
+        finished,           \
+        fgc,                \
+        isStopped,          \
+        startGUI,           \
+        version            \
 
     from src.agentcount import agentCount
     from src.checkCases import checkCases
     from src.setCommit import setCommit
     from src.setCases import setNewCase
+    from src.ua_status import check_unavail
 except:
     from end import end
     from browser import mainLaunch
     from updatetk import updatetk as status
     from config import getConfig, setAutorun
     from tabs import createTab, defaultTabs, closeTab, switchTab
-    from constrants import startGUI,driver, action, addminutes,autorun, isStopped, retrymax, finished, bgc, bgaccent, fgc,debug, version
+    from constrants import  \
+        action,             \
+        addminutes,         \
+        autorun,            \
+        bgaccent,           \
+        bgc,                \
+        commitscreated,     \
+        debug,              \
+        driver,             \
+        finished,           \
+        fgc,                \
+        isStopped,          \
+        startGUI,           \
+        version            \
+        
 
     from agentcount import agentCount
     from checkCases import checkCases
     from setCommit import setCommit
     from setCases import setNewCase
+    from ua_status import check_unavail
 
+#TODO
+#prin out to txt logs
+#threading?
+#check logged in/out
+#set different statuses
 
 def preload(preStage = 0):
     global driver, action, B2, finished
@@ -52,13 +86,14 @@ def preload(preStage = 0):
     preload(preStage + 1)
 
 def main(mainStage = 0):
-    global addminutes
+    global addminutes, commitscreated
     while finished == False:
         pass
     if isStopped == 1:
         return
     elif mainStage == 0:
         ac = agentCount(driver,root,B1)
+        status(B4,"Agents: {}".format(ac+1))
         #print(ac)
         if ac >= 1:
             addminutes = 2
@@ -80,6 +115,7 @@ def main(mainStage = 0):
             return
     elif mainStage == 3:
         sco = setCommit(driver,B1,root,addminutes)
+        commitscreated += 1
         if sco == 0:
             status(B1,"Commit err, restarting...")
             cleanup(60000,3)
@@ -91,6 +127,7 @@ def main(mainStage = 0):
     root.after(250,main(mainStage + 1))
 
 def cleanup(seconds, option = 0):
+    status(B5,"Created: {}".format(commitscreated))
     if option == 1:
         root.after(seconds, threadworker(0))
     elif option == 3:
@@ -152,6 +189,7 @@ def countdown(count):
 def rebuild():
     global isStopped
     status(B1,"Stopping...")
+    status(B4,"py.wilsonngo.com")
     isStopped = 1
     try:
         driver.quit()
@@ -257,7 +295,7 @@ else:
     if debug == 1:
         version = str(version) + " BETA"
 
-    B4 = Label(
+    B5 = Label(
         frm, 
         text="VERSION: {}".format(version),
         wraplength=200, 
@@ -266,7 +304,7 @@ else:
         fg=fgc,
         font=('Arial', 7)
         )
-    B4.grid(column=0, row=5, ipady=0)
+    B5.grid(column=0, row=5, ipady=0)
 
     if autorun.get() == "1":
         status(B2,"Stop",rebuild)

@@ -5,9 +5,11 @@ try:
 except:
     from updatetk import updatetk as status
     from constrants import debug
-def getConfig(btn):
+
+def getConfig(btn = None):
     try:
-        status(btn,"Getting config file...")
+        if btn is not None:
+            status(btn,"Getting config file...")
         try:
             with open('assets\config.json','r') as f:
                 config = json.load(f)
@@ -15,7 +17,8 @@ def getConfig(btn):
             with open('config.json','r') as f:
                 config = json.load(f)
     except:
-        status(btn,"No config file found! Creating one...")
+        if btn is not None:
+            status(btn,"No config file found! Creating one...")
         default_user = os.getcwd().split("\\")
         default_path = "C:\\Users\\{}\\AppData\\Local\\Google\\Chrome\\User Data\\Default".format(default_user[2])
         
@@ -38,10 +41,12 @@ def getConfig(btn):
         else:
             with open('config.json','w') as f:
                 json.dump(config, f)
-        
-        getConfig(btn)
-
-    status(btn,"Config caught!")
+        if btn is not None:
+            getConfig(btn)
+        else:
+            getConfig()
+    if btn is not None:
+        status(btn,"Config caught!")
     
     return config
 

@@ -13,6 +13,6 @@ def end(root, driver = None):
         #print(functionerr)
         pass
     try:
-        os.system('cmd /c taskkill /f /im cmtmgr.exe')
+        os.system('cmd taskkill /f /im cmtmgr.exe')
     except: 
         pass
